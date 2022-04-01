@@ -11,10 +11,12 @@ import time
 
 #Filters list of links for zoom links
 class Scraper:
-    def __init__(self):
+    def __init__(self, starterSite):
         self.crawlSites = {}
         self.zoomLinks = []
-        self.site = ""
+        self.site = starterSite
+        self.browser = webdriver.Firefox()
+
 
     #Check for valid link
     def is_valid(self, link):
@@ -30,7 +32,8 @@ class Scraper:
                 self.zoomLinks.append(link.get('href'))
             #If it is an internal link, it is placed into the dictionary for crawling
             elif(url.scheme != 'mailto' and bool(url.path) and not bool(url.fragment)):
-                self.crawlSites[urljoin(self.site, urlparse(link.get('href')).path)] = False
+                if(urljoin(self.site, urlparse(link.get('href')).path) not in self.crawlSites):
+                    self.crawlSites[urljoin(self.site, urlparse(link.get('href')).path)] = False
 
     #Filters zoom links list to keep zoom links
     def zoomProcess(self):
@@ -53,6 +56,32 @@ class Scraper:
             print(links)
             print('\n')
 
+    def scrapeWeb(self):
+        self.browser.get(self.site)
+        while True:
+            userIn = input('\nHave you logged in?\n')
+            if userIn == 'Y':
+                break
+            else:
+                continue
+        html = self.browser.page_source
+        self.extractLinks(html)
+        self.zoomProcess()
+
+        while True:
+            try:
+                crawlIter = iter(self.crawlSites)
+                crawlSite = next(crawlIter) 
+                while self.crawlSites[crawlSite] == True:
+                    crawlSite = next(crawlIter)
+                self.browser.get(crawlSite)
+                self.crawlSites[crawlSite] = True
+                html = self.browser.page_source
+                self.extractLinks(html)
+                self.zoomProcess()
+            except StopIteration:
+                break
+
     #Inputs links into the dictionary, make sure they are valid and filtered links
     def linksDictionary(self, links):
         for link in links:
@@ -60,16 +89,17 @@ class Scraper:
                 self.crawlSites[link] = False
 
 def main():
-    #CEN Syllabus Webpage
+    #Test Sites
     #https://ufl.instructure.com/courses/447867/assignments/syllabus
     #https://ufl.instructure.com/courses/447867/pages/pm-slash-information?module_item_id=9127714
     #https://ufl.instructure.com/courses/447867
+    #https://ufl.instructure.com/courses/447867/modules
 
     inValue = ''
-    webScraper = Scraper()
+
+#    try:
     while True:
         inValue = input('Enter website:')
-
         userIn = input('\nIs this the correct website? Y/N\n')
         if userIn == 'Y':
             break
@@ -78,22 +108,10 @@ def main():
         else:
             continue
 
-    try:
-        browser = webdriver.Firefox()
-        browser.get(inValue)
-        webScraper.site = inValue
-        while True:
-            userIn = input('\nHave you logged in?\n')
-            if userIn == 'Y':
-                html = browser.page_source
-                webScraper.extractLinks(html)
-                webScraper.zoomProcess()
-                webScraper.printZoom()
-                break
-            else:
-                continue
-    except Exception as exc:
-        print('There was a problem: %s' % (exc))
+    webScraper = Scraper(inValue)
+    webScraper.scrapeWeb()
+#    except Exception as exc:
+#        print('There was a problem: %s' % (exc))
 
 if __name__ == "__main__":
     main()
