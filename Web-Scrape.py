@@ -14,6 +14,7 @@ class Scraper:
     def __init__(self):
         self.crawlSites = {}
         self.zoomLinks = []
+        self.site = ""
 
     #Check for valid link
     def is_valid(self, link):
@@ -21,25 +22,36 @@ class Scraper:
         return bool(parsed.netloc) and bool(parsed.scheme)
 
     def extractLinks(self, html):
-        parse = bs4.BeautifulSoup(html, 'html.parser')
+        parse = bs4.BeautifulSoup(html, 'lxml')
         for link in parse.find_all('a', href = True):
             #If it is an external link, it is placed into a list to filter for zoom links
-            if(bool(urlparse(link.get('href').netloc))):
+            url = urlparse(link.get('href'))
+            if(url.scheme == 'https' and bool(url.netloc)):
                 self.zoomLinks.append(link.get('href'))
             #If it is an internal link, it is placed into the dictionary for crawling
-            else:
-                self.crawlSites[urljoin(html, link.get('href'))] = False
+            elif(url.scheme != 'mailto' and bool(url.path) and not bool(url.fragment)):
+                self.crawlSites[urljoin(self.site, urlparse(link.get('href')).path)] = False
 
     #Filters zoom links list to keep zoom links
-    def zoomLinks(self):
+    def zoomProcess(self):
         linkRegex = re.compile(r'ufl.zoom.us')
-        for link in self.zoomLinks:
-            zoomFind = linkRegex.search(link)
+        iterator = 0
+        listLen = len(self.zoomLinks)
+        while iterator < listLen:
+            zoomFind = linkRegex.search(self.zoomLinks[iterator])
             if(zoomFind):
                 if(zoomFind.group() == 'ufl.zoom.us'):
+                    iterator = iterator + 1
                     continue
             else:
-                self.zoomLinks.remove(link)
+                self.zoomLinks.remove(self.zoomLinks[iterator])
+                listLen = len(self.zoomLinks)
+        self.zoomLinks = list(set(self.zoomLinks))
+
+    def printZoom(self):
+        for links in self.zoomLinks:
+            print(links)
+            print('\n')
 
     #Inputs links into the dictionary, make sure they are valid and filtered links
     def linksDictionary(self, links):
@@ -47,15 +59,15 @@ class Scraper:
             if link not in self.crawlSites:
                 self.crawlSites[link] = False
 
-webScraper = Scraper()
-
 def main():
     #CEN Syllabus Webpage
     #https://ufl.instructure.com/courses/447867/assignments/syllabus
+    #https://ufl.instructure.com/courses/447867/pages/pm-slash-information?module_item_id=9127714
     #https://ufl.instructure.com/courses/447867
 
     inValue = ''
-    while inValue == '':
+    webScraper = Scraper()
+    while True:
         inValue = input('Enter website:')
 
         userIn = input('\nIs this the correct website? Y/N\n')
@@ -66,17 +78,17 @@ def main():
         else:
             continue
 
-    browser = webdriver.Firefox()
-    html = ''
-
     try:
+        browser = webdriver.Firefox()
         browser.get(inValue)
+        webScraper.site = inValue
         while True:
             userIn = input('\nHave you logged in?\n')
             if userIn == 'Y':
                 html = browser.page_source
-                for zoomLink in zoomLinks(extractLinks(html)):
-                    print(zoomLink)
+                webScraper.extractLinks(html)
+                webScraper.zoomProcess()
+                webScraper.printZoom()
                 break
             else:
                 continue
