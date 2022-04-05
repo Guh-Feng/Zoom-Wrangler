@@ -43,9 +43,8 @@ pip install selenium beautifulsoup4 lxml
 ##### NOTE: It is crucial that ```:$PATH``` is appended to this command, otherwise your PATH environment variable may be irreversibly modified.
 #### Then, restart your machine.
 
-#### "chromedriver" can't be opened because Apple cannot check it for malicious software.
-##### Navigate to the Security and Privacy section in settings
-System Preferences -> Security & Privacy
-##### Then, under the General tab, press the button that says "Allow Anyway" 
-This is next to the text that reads "'chromedriver' was blocked from use because it is not from an identified developer.
-
+### "chromedriver" can't be opened because Apple cannot check it for malicious software.
+#### Navigate to the Security and Privacy section in settings
+#### System Preferences -> Security & Privacy
+#### Then, under the General tab, press the button that says "Allow Anyway" 
+#### This is next to the text that reads "'chromedriver' was blocked from use because it is not from an identified developer.
