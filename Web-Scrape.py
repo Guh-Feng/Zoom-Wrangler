@@ -25,7 +25,7 @@ class Scraper:
 
     def extractLinks(self, html):
         parse = bs4.BeautifulSoup(html, 'lxml')
-        for link in parse.find_all('a', href = True):
+        for link in parse.find_all('a', href = True, download = False):
             #If it is an external link, it is placed into a list to filter for zoom links
             url = urlparse(link.get('href'))
             if(url.scheme == 'https' and bool(url.netloc)):
