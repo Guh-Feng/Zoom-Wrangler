@@ -28,9 +28,7 @@ class Scraper:
 
     def extractLinks(self, html):
         parse = bs4.BeautifulSoup(html, 'lxml')
-        for link in parse.find_all('a', href = True):
-            # TODO: Add an exception that does not try to access links ending in
-            # common file extensions, like .pdf or .docx
+        for link in parse.find_all('a', href = True, download = False):
             #If it is an external link, it is placed into a list to filter for zoom links
             url = urlparse(link.get('href'))
             if(url.scheme == 'https' and bool(url.netloc)):
