@@ -11,23 +11,16 @@ class Scraper:
         self.crawlSites = {}
         self.zoomLinks = []
         self.site = starterSite
-<<<<<<< HEAD:WebScrape.py
         # TODO: Add options for which browser to use.
         #self.browser = webdriver.Firefox()
         #self.browser = webdriver.Safari()
         self.browser = webdriver.Chrome()
-=======
         self.cycles = int(starterCycles)
-        self.browser = webdriver.Firefox()
->>>>>>> e75a28187a02b6151845b7b1b072efe64d02371a:Web-Scrape.py
 
     #Finds and filters links
     def extractLinks(self, html):
         parse = bs4.BeautifulSoup(html, 'lxml')
-<<<<<<< HEAD:WebScrape.py
-=======
         #Processes extracted links
->>>>>>> e75a28187a02b6151845b7b1b072efe64d02371a:Web-Scrape.py
         for link in parse.find_all('a', href = True, download = False):
             #If it is an external link, it is placed into a list to filter for zoom links
             url = urlparse(link.get('href'))
@@ -70,6 +63,8 @@ class Scraper:
             elif userIn.capitalize() == 'N':
                 continue
         html = self.browser.page_source
+        
+        print('\nProcessing links.')
         self.extractLinks(html)
         self.zoomProcess()
 
@@ -103,7 +98,6 @@ class Scraper:
                 except StopIteration:
                     break
 
-<<<<<<< HEAD:WebScrape.py
     #Inputs links into the dictionary, make sure they are valid and filtered links
     def linksDictionary(self, links):
         for link in links:
@@ -118,29 +112,5 @@ class Scraper:
 #Checks through pages, modules, and Zoom conferences tabs
 #Double hashtables via dictionaries, one for checked sites and one for unchecked sites for crawling pages
 #saveFile = open('site.txt', 'wb')
-=======
-        self.printZoom()
-
-#Main function
-def main():
-    inValue = ''
-    cyclesIn = 0
-
-    #Takes user inputs
-    while True:
-        inValue = input('Enter website:')
-        userIn = input('\nIs this the correct website? Y/N\n')
-        if userIn == 'Y':
-            cyclesIn = input('\nHow many pages do you want to search? Type 0 to search all available pages.\n')
-            break
-        elif userIn == 'N':
-            continue
-        else:
-            continue
-
-    webScraper = Scraper(inValue, cyclesIn)
-    webScraper.scrapeWeb()
-
-if __name__ == "__main__":
-    main()
->>>>>>> e75a28187a02b6151845b7b1b072efe64d02371a:Web-Scrape.py
+        #self.printZoom()
+        

@@ -9,19 +9,21 @@ def main():
     #https://ufl.instructure.com/courses/447867/modules
 
     inValue = ''
+    cyclesIn = 0
 
 #    try:
     while True:
         inValue = input('Enter website: ')
         userIn = input('\nIs this the correct website? (Y/N)\n')
         if userIn.capitalize() == 'Y':
+            cyclesIn = input('\nHow many pages do you want to search? Type 0 to search all available pages.\n')
             break
         elif userIn.capitalize() == 'N':
             continue
         else:
             continue
 
-    webScraper = Scraper(inValue)
+    webScraper = Scraper(inValue, cyclesIn)
     webScraper.scrapeWeb()
     
     zoom_links = webScraper.returnLinks()
