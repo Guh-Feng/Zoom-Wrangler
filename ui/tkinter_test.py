@@ -56,6 +56,7 @@ def popUp():
         #TODO: add the additional link to the csv file
         #also get the time of the meeting for notifications
         myListbox.insert(END, inputtxt.get(1.0, "end-1c"))
+        top.destroy()
 
     # Button Creation
     submitButton = Button(top, text = "Submit", command = addLink)
