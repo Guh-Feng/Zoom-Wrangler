@@ -62,11 +62,10 @@ class Scraper:
     def scrapeWeb(self):
         self.browser.get(self.site)
         while True:
-            # TODO: Be more clear with how the user should respond.
-            userIn = input('\nHave you logged in?\n')
-            if userIn == 'Y':
+            userIn = input('\nHave you logged in? (Y/N)\n')
+            if userIn.capitalize() == 'Y':
                 break
-            else:
+            elif userIn.capitalize() == 'N':
                 continue
         html = self.browser.page_source
         self.extractLinks(html)
