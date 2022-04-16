@@ -7,16 +7,19 @@ root.title('Zoom Wrangler')
 #root.iconbitmap('wrangler.ico')
 root.geometry("750x850")
 
-#listbox
+
+
+
+#listboxes
 myListbox = Listbox(root, height=40, width=100)
 myListbox.pack(pady=15)
 
 #add items from csv file
 myList = []
 
-#TODO: get links from csv file on startup
-"""
+'''
 reader = csv.reader(open("links.csv", "r", encoding='utf-8-sig'))
+print("opened")
 line_count = 0
 stop_count = reader.line_num
 for row in reader:
@@ -27,10 +30,30 @@ for row in reader:
         break
     print(row)
     myList.append(row[6]) #get the link
-"""
+'''
 
-for item in myList:
-    myListbox.insert(END, item)
+#write info from CSV into list
+with open('links.csv', 'r') as read_obj:
+    reader = csv.reader(read_obj)
+    myList = list(reader)
+
+#write data from list into UI
+#header
+fhead = myList[0][0]
+myListbox.insert(END, f"{fhead[3:]:<20} {myList[0][1]:<45} {myList[0][5]:<15} {myList[0][6]}" )
+#myListbox.insert(END, f"{hellomn:<20} {myList[0][1]:<45} {myList[0][5]:<15} {myList[0][6]}" )
+#print(f"{fhead[3:]:<20} {myList[0][1]:<45} {myList[0][5]:<15} {myList[0][6]}")
+#rest of items
+
+#known issue, whitespace is not the same length as characters, makes weird issues with formatting
+for x in range(1,len(myList)):
+    myListbox.insert(END, f"{myList[x][0]:<20} {myList[x][1]:<45} {myList[x][5]:<15} {myList[x][6]}")
+
+
+
+#TODO: schedule notifcations in list
+
+
 
 def delete():
     myListbox.delete(ANCHOR)
