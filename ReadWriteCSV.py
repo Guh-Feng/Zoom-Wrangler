@@ -4,13 +4,13 @@ from datetime import datetime, date, timedelta
 
 class Database:
     def __init__(self, passed_links, is_new = True):
-        file_name = ''
+        self.file_name = ''
         if is_new:
-            file_name = input('Please input name of the new database file: ')
+            self.file_name = input('Please input name of the new database file: ')
         else:
-            file_name = input('Please input name of the database file: ')
-        file_name = file_name + '.csv'
-        with open(file_name, 'a', newline='') as csvfile:
+            self.file_name = input('Please input name of the database file: ')
+        self.file_name = self.file_name + '.csv'
+        with open(self.file_name, 'a', newline='') as csvfile:
             writer = csv.writer(csvfile)
             if is_new:
                 writer.writerow(['Class Code', 'Class Name', 'Day of week (0 = Monday, 1 = Tuesday..)',
@@ -53,3 +53,16 @@ class Database:
                     else:
                         print('Invalid input!')
                         continue
+    
+    def fetch(self, row_count):
+        with open(self.file_name, "r", encoding='utf-8-sig') as csvfile:
+            reader = csv.reader(csvfile)
+            line_count = 0
+            stop_count = row_count
+            for row in reader:
+                line_count = line_count + 1
+                if line_count == 1:
+                    continue
+                if line_count > stop_count:
+                    break
+            return row
