@@ -3,7 +3,7 @@ Very cool project.
 
 ## User dependencies:
 ```
-pip install selenium beautifulsoup4 lxml
+pip install selenium beautifulsoup4 lxml plyer
 ```
 
 ### Developer tests require ```pytest```
