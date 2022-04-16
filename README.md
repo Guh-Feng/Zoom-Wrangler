@@ -1,11 +1,28 @@
-# TBD-CEN-Project
-Very cool project.
+# The Zoom Wrangler
+A program for those who can't bother to dig around for the right Zoom link for their appointments.
 
 ## User dependencies:
 ```
 pip install selenium beautifulsoup4 lxml plyer
 ```
 
+## If using Chrome: requires ChromeDriver.
+### The chromedriver executable needs to be in PATH
+#### First, download the correct version of chromedriver that corresponds to your version of Chrome:
+```https://chromedriver.chromium.org/downloads```
+#### Then, unpackage the ZIP file and add the resulting binary to your PATH
+##### This will vary by machine. One could run ```echo $PATH``` in terminal to view the directories that are in the PATH environment variable. 
+#### Put the binary in one of these directories or run this command in terminal:
+
+```export PATH=[INSERT_DIRECTORY_HERE]:$PATH```
+
+#### where ```[INSERT_DIRECTORY_HERE]``` is replaced with the complete path to ```chromedriver```
+
+#### For example:
+```export PATH=/Users/username/Documents/driverfolder:$PATH```
+
+##### NOTE: It is crucial that ```:$PATH``` is appended to this command, otherwise your PATH environment variable may be irreversibly modified.
+#### Then, restart your machine.
 ### Developer tests require ```pytest```
 
 ## Additional information for MacOS & Safari (please read instructions carefully and completely before proceeding):
@@ -23,28 +40,3 @@ pip install selenium beautifulsoup4 lxml plyer
 
 ### For Sierra (10.12) and earlier, you must authorize ```safaridriver``` to launch the XPC service that hosts the local web server.
 #### Manually run ```/usr/bin/safaridriver``` in terminal and follow the authentication prompt.
-
-## Additional information for MacOS & Chrome (please read instructions carefully and completely before proceeding):
-
-### The chromedriver executable needs to be in PATH
-#### First, download the correct version of chromedriver that corresponds to your version of Chrome:
-```https://chromedriver.chromium.org/downloads```
-#### Then, unpackage the ZIP file and add the resulting binary to your PATH
-##### This will vary by machine. One could run ```echo $PATH``` in terminal to view the directories that are in the PATH environment variable. 
-#### Put the binary in one of these directories or run this command in terminal:
-
-```export PATH=[INSERT_DIRECTORY_HERE]:$PATH```
-
-#### where ```[INSERT_DIRECTORY_HERE]``` is replaced with the complete path to ```chromedriver```
-
-#### For example:
-```export PATH=/Users/username/Documents/driverfolder:$PATH```
-
-##### NOTE: It is crucial that ```:$PATH``` is appended to this command, otherwise your PATH environment variable may be irreversibly modified.
-#### Then, restart your machine.
-
-### "chromedriver" can't be opened because Apple cannot check it for malicious software.
-#### Navigate to the Security and Privacy section in settings
-#### System Preferences -> Security & Privacy
-#### Then, under the General tab, press the button that says "Allow Anyway" 
-#### This is next to the text that reads "'chromedriver' was blocked from use because it is not from an identified developer.
