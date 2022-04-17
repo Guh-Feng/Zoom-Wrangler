@@ -4,6 +4,7 @@ from urllib.request import urlparse, urljoin
 import bs4
 import re
 import time
+from tkinter import *
 
 #Primary class
 class Scraper:
@@ -56,15 +57,29 @@ class Scraper:
     #Scrapes Canvas from a starting link
     def scrapeWeb(self):
         self.browser.get(self.site)
-        while True:
-            userIn = input('\nHave you logged in? (Y/N)\n')
-            if userIn.capitalize() == 'Y':
-                break
-            elif userIn.capitalize() == 'N':
-                continue
+        loggedIn = False
+
+        def logIn():
+            loggedIn = True
+            top.destroy()
+
+        top = Tk()
+        top.geometry("300x100")
+        top.title("Log In!")
+        
+        txt = Text(top, height = 2, width = 29)
+        txt.insert(INSERT, "Click continue when you have logged in")
+        txt.pack()
+
+        conButton = Button(top, text = "Continue", command = logIn)
+        conButton.pack()
+
+        top.mainloop()
+        
+        
         html = self.browser.page_source
         
-        print('\nProcessing links.')
+        #print('\nProcessing links.')
         self.extractLinks(html)
         self.zoomProcess()
 
