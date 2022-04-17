@@ -65,6 +65,14 @@ def openLink():
     open_meeting((myList[selection][6]))
     pass
 
+<<<<<<< Updated upstream
+=======
+def popUp():
+<<<<<<< Updated upstream
+    top = Toplevel(root)
+    top.geometry("500x100")
+    top.title("Input")
+>>>>>>> Stashed changes
 
 def popUp():
     # Create new window
@@ -91,11 +99,47 @@ def popUp():
 
     #inner function for adding link
     def addLink():
+<<<<<<< Updated upstream
+=======
+        #TODO: add the additional link to the csv file
+        #also get the time of the meeting for notifications
+        myListbox.insert(END, inputtxt.get(1.0, "end-1c"))
+        top.destroy()
+=======
+    # Create new window
+    topp = Toplevel(root)
+    topp.geometry("800x300")
+    topp.title("Input")
+
+    # TextBox creation for inputs
+    inpt0 = Text(topp, height = 1, width = 50)
+    inpt0.insert(INSERT, "<Class Code>")
+    inpt0.pack()
+    inpt1 = Text(topp, height = 1, width = 50)
+    inpt1.insert(INSERT, "<Class Name>")
+    inpt1.pack()
+    inpt2 = Text(topp, height = 1, width = 50)
+    inpt2.insert(INSERT, "<Meeting Day (0 = Monday, 1 = Tuesday..)>")
+    inpt2.pack()
+    inpt3 = Text(topp, height = 1, width = 50)
+    inpt3.insert(INSERT, "<Meeting Time>")
+    inpt3.pack()
+    inpt4 = Text(topp, height = 1, width = 50)
+    inpt4.insert(INSERT, "<Meeting Link>")
+    inpt4.pack()
+
+    #inner function for adding link
+    def addLink():
+>>>>>>> Stashed changes
 
         #TODO: also get the time of the meeting for notifications, maybe schedule here?
 
         # Small error check to see if inputs were missed
+<<<<<<< Updated upstream
         if inpt0.get(1.0, "end-1c") == "<Class Code>" or inpt1.get(1.0, "end-1c") == "<Class Name>" or inpt2.get(1.0, "end-1c") == "<Meeting Day>" or inpt3.get(1.0, "end-1c") == "<Meeting Time>" or inpt4.get(1.0, "end-1c") == "<Meeting Link>":
+=======
+        if inpt0.get(1.0, "end-1c") == "<Class Code>" or inpt1.get(1.0, "end-1c") == "<Class Name>" or inpt2.get(1.0, "end-1c") == "<Meeting Day (0 = Monday, 1 = Tuesday..)>" or inpt3.get(1.0, "end-1c") == "<Meeting Time>" or inpt4.get(1.0, "end-1c") == "<Meeting Link>":
+>>>>>>> Stashed changes
             top = Toplevel(root)
             top.geometry("300x100")
             top.title("Error!")
@@ -112,6 +156,10 @@ def popUp():
         writeList()
         topp.destroy()
 
+<<<<<<< Updated upstream
+=======
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
 
     # Button Creation
     submitButton = Button(topp, text = "Submit", command = addLink)

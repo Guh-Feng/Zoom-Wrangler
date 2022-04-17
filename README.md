@@ -3,7 +3,15 @@ A program for those who can't bother to dig around for the right Zoom link for t
 
 ## User dependencies:
 ```
+<<<<<<< Updated upstream
 pip install selenium beautifulsoup4 lxml plyer
+=======
+<<<<<<< Updated upstream
+pip install selenium beautifulsoup4 lxml
+=======
+pip install selenium beautifulsoup4 lxml plyer pyautogui
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
 ```
 
 ## If using Chrome: requires ChromeDriver.
