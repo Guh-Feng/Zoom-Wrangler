@@ -67,6 +67,8 @@ def main():
     top2.geometry("300x100")
     top2.title("New File?")
     
+    global file_name
+
     txt = Text(top2, height = 2, width = 30)
     txt.insert(INSERT, "Are you starting a new file?")
     txt.pack()
@@ -78,6 +80,24 @@ def main():
     noButton.pack()
 
     top2.mainloop()
+
+    top3 = Tk()
+    top3.geometry("300x100")
+    top3.title("File name?")
+
+    fn = Text(top3, height = 2, width = 30)
+    fn.insert(INSERT, "<file name>")
+    fn.pack()
+    
+    def con2():
+        global file_name_
+        file_name_ = fn.get(1.0, "end-1c")
+        top3.destroy()
+
+    conButton2 = Button(top3, text = "Continue", command = con2)
+    conButton2.pack()
+
+    top3.mainloop()
 
 
     """
@@ -95,7 +115,7 @@ def main():
     """
     
     global newness
-    db = Database(zoom_links, is_new = newness)
+    db = Database(zoom_links, is_new = newness, file_name = file_name_)
     
 #    except Exception as exc:
 #        print('There was a problem: %s' % (exc))

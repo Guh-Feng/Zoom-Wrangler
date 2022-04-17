@@ -13,9 +13,9 @@ class Scraper:
         self.zoomLinks = []
         self.site = starterSite
         # TODO: Add options for which browser to use.
-        self.browser = webdriver.Firefox()
+        #self.browser = webdriver.Firefox()
         #self.browser = webdriver.Safari()
-        #self.browser = webdriver.Chrome()
+        self.browser = webdriver.Chrome()
         self.cycles = int(starterCycles)
 
     #Finds and filters links

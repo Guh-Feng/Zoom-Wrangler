@@ -4,30 +4,29 @@ from datetime import datetime, date, timedelta
 from tkinter import *
 
 class Database:
-    def __init__(self, passed_links, is_new = True):
-        self.file_name = 'links'
+    def __init__(self, passed_links, file_name, is_new = True, ):
+        self.file_name = file_name
         """
         if is_new:
             self.file_name = input('Please input name of the new database file: ')
         else:
             self.file_name = input('Please input name of the database file: ')
         """
-        self.file_name = self.file_name + '.csv'
+        if self.file_name[-4:] != '.csv':
+            self.file_name = self.file_name + '.csv'
         with open(self.file_name, 'a', newline='') as csvfile:
             writer = csv.writer(csvfile)
             if is_new:
                 writer.writerow(['Class Code', 'Class Name', 'Day of week (0 = Monday, 1 = Tuesday..)',
                                 'Notification Time', 'Auto-Open Time', 'Start Time', 'Link'])
             #print('Found', len(passed_links), 'link(s)!')
-            for link in passed_links:
+            for links in passed_links:
                 #print('\nFound Zoom link:', link)
                 #global looping
                 #looping = True
                 #while looping:
                 def yes():
                     top.destroy()
-
-
                     def submit():
                         # Get user input about this appointment
                         row = []
@@ -51,7 +50,7 @@ class Database:
                         row.append(db_notif_time)
                         row.append(db_auto_open_time)
                         row.append(db_start_time)
-                        row.append(link)
+                        row.append(links)
                         writer.writerow(row)
 
                         top2.destroy()
@@ -73,15 +72,15 @@ class Database:
                     day.pack()
 
                     time = Text(top2, height=1, width = 35)
-                    time.insert(INSERT, "<start time>")
+                    time.insert(INSERT, "<start time (HH:MM)>")
                     time.pack()
 
                     notif = Text(top2, height=1, width = 35)
-                    notif.insert(INSERT, "<notification time before>")
+                    notif.insert(INSERT, "<mins before notification>")
                     notif.pack()
 
                     op = Text(top2, height=1, width = 35)
-                    op.insert(INSERT, "<open time before>")
+                    op.insert(INSERT, "<mins before opening>")
                     op.pack()
 
                     subButton = Button(top2, text = "Submit", command = submit)
@@ -100,7 +99,7 @@ class Database:
                 txt.insert(INSERT, "Continue adding this link?")
                 txt.pack()
 
-                link = Label(top, text=str(link))
+                link = Label(top, text=str(links))
                 #link = Text(top, height = 1, width = 200)
                 #link.insert(INSERT, str(link))
                 link.pack()
