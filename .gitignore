@@ -1,0 +1,12 @@
+Testing.csv
+__pycache__/ReadWriteCSV.cpython-310.pyc
+__pycache__/WebScrape.cpython-310.pyc
+./__pycache__/*
+./vscode/*
+./vs/*
+.vs/ProjectSettings.json
+.vs/slnx.sqlite
+.vs/VSWorkspaceState.json
+.vs/TBD-CEN-Project/v16/.suo
+__pycache__/WebScrape.cpython-39.pyc
+__pycache__/ReadWriteCSV.cpython-39.pyc
