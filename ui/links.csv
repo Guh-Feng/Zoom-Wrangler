@@ -1,23 +1,19 @@
-<<<<<<< Updated upstream
-=======
-<<<<<<< Updated upstream
-﻿Class Code,Class Name,"""Day of week (0 = Monday, 1 = Tuesday..)""",Notification Time,Auto-Open Time,Start Time,Link
+Class Code,Class Name,"""Day of week (0 = Monday, 1 = Tuesday..)""",Notification Time,Auto-Open Time,Start Time,Link
 CEN3031,"""Software Engineering, Intro to""",2,14:55,14:59,15:00,https://ufl.zoom.us/j/99700198187
 x,x,2,12:00,12:00,12:00,https://ufl.zoom.us/j/92738786613?pwd=VXZlUnduUGFMVzZhV2hLVmtMN1ptQT09
 x,x,2,12:00,12:00,12:00,https://ufl.zoom.us/j/134134143
 x,x,2,12:00,12:00,12:00,example zoom link
 x,x,2,12:00,12:00,12:00,another link
-=======
->>>>>>> Stashed changes
 Class Code,Class Name,"""Day of week (0 = Monday, 1 = Tuesday..)""",Notification Time,Auto-Open Time,Start Time,Link
 CEN3031,"Software Engineering, Intro to",2,14:55,14:59,15:00,https://ufl.zoom.us/j/99700198187
 ZEM213,"Zoom Etiquette, Intro",2,12:00,12:00,12:00,https://ufl.zoom.us/j/92738786613?pwd=VXZlUnduUGFMVzZhV2hLVmtMN1ptQT09
 BRU9110,Intro to Business Coloring Books,2,12:00,12:00,12:00,https://ufl.zoom.us/j/134134143
 MAS2173,Math for Preschoolers,2,12:00,12:00,12:00,example zoom link
-<<<<<<< Updated upstream
+GEB2015,Advanced Business Addition,2,12:00,12:00,12:00,another link
+HAM,Intro to hamburger,3,14:00,14:00,14:00,zoom.com/hamburger
+Class Code,Class Name,"Day of week (0 = Monday, 1 = Tuesday..)",Notification Time,Auto-Open Time,Start Time,Link
+SWE,Software engineering,0,T11:55,T11:59,T12:00,https://ufl.zoom.us/my/drsanethiathomas
+code,class name,1,T11:55,T11:59,T12:00,.!text2
 GEB2015,Advanced Business Addition,2,12:00,12:00,12:00,another link
 NAS2001,Intro to Gargle Bargle Lang,2,12:00,12:00,12.00, zoomlink1000
-=======
 NAS2001,Intro to Gargle Bargle Lang,2,12:00,12:00,12.00, zoomlink1000
->>>>>>> Stashed changes
->>>>>>> Stashed changes
