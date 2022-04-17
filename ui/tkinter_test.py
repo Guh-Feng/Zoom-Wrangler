@@ -65,7 +65,6 @@ def openLink():
     open_meeting((myList[selection][6]))
     pass
 
-
 def popUp():
     # Create new window
     topp = Toplevel(root)
@@ -91,11 +90,40 @@ def popUp():
 
     #inner function for adding link
     def addLink():
+        #TODO: add the additional link to the csv file
+        #also get the time of the meeting for notifications
+        myListbox.insert(END, inputtxt.get(1.0, "end-1c"))
+        topp.destroy()
+
+    # Create new window
+    topp = Toplevel(root)
+    topp.geometry("800x300")
+    topp.title("Input")
+
+    # TextBox creation for inputs
+    inpt0 = Text(topp, height = 1, width = 50)
+    inpt0.insert(INSERT, "<Class Code>")
+    inpt0.pack()
+    inpt1 = Text(topp, height = 1, width = 50)
+    inpt1.insert(INSERT, "<Class Name>")
+    inpt1.pack()
+    inpt2 = Text(topp, height = 1, width = 50)
+    inpt2.insert(INSERT, "<Meeting Day (0 = Monday, 1 = Tuesday..)>")
+    inpt2.pack()
+    inpt3 = Text(topp, height = 1, width = 50)
+    inpt3.insert(INSERT, "<Meeting Time>")
+    inpt3.pack()
+    inpt4 = Text(topp, height = 1, width = 50)
+    inpt4.insert(INSERT, "<Meeting Link>")
+    inpt4.pack()
+
+    #inner function for adding link
+    def addLink():
 
         #TODO: also get the time of the meeting for notifications, maybe schedule here?
 
         # Small error check to see if inputs were missed
-        if inpt0.get(1.0, "end-1c") == "<Class Code>" or inpt1.get(1.0, "end-1c") == "<Class Name>" or inpt2.get(1.0, "end-1c") == "<Meeting Day>" or inpt3.get(1.0, "end-1c") == "<Meeting Time>" or inpt4.get(1.0, "end-1c") == "<Meeting Link>":
+        if inpt0.get(1.0, "end-1c") == "<Class Code>" or inpt1.get(1.0, "end-1c") == "<Class Name>" or inpt2.get(1.0, "end-1c") == "<Meeting Day (0 = Monday, 1 = Tuesday..)>" or inpt3.get(1.0, "end-1c") == "<Meeting Time>" or inpt4.get(1.0, "end-1c") == "<Meeting Link>":
             top = Toplevel(root)
             top.geometry("300x100")
             top.title("Error!")
@@ -111,7 +139,6 @@ def popUp():
         myListbox.insert(END, f"{myList[mlSize][0]:<20} {myList[mlSize][1]:<45} {myList[mlSize][5]:<15} {myList[mlSize][6]}")
         writeList()
         topp.destroy()
-
 
     # Button Creation
     submitButton = Button(topp, text = "Submit", command = addLink)

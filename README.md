@@ -3,7 +3,7 @@ A program for those who can't bother to dig around for the right Zoom link for t
 
 ## User dependencies:
 ```
-pip install selenium beautifulsoup4 lxml plyer
+pip install selenium beautifulsoup4 lxml plyer pyautogui
 ```
 
 ## If using Chrome: requires ChromeDriver.
