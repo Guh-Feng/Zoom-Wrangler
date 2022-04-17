@@ -13,9 +13,9 @@ class Scraper:
         self.zoomLinks = []
         self.site = starterSite
         # TODO: Add options for which browser to use.
-        #self.browser = webdriver.Firefox()
+        self.browser = webdriver.Firefox()
         #self.browser = webdriver.Safari()
-        self.browser = webdriver.Chrome()
+        #self.browser = webdriver.Chrome()
         self.cycles = int(starterCycles)
 
     #Finds and filters links
@@ -67,7 +67,7 @@ class Scraper:
         top.geometry("300x100")
         top.title("Log In!")
         
-        txt = Text(top, height = 2, width = 30)
+        txt = Text(top, height = 2, width = 29)
         txt.insert(INSERT, "Click continue when you have logged in")
         txt.pack()
 
@@ -76,9 +76,6 @@ class Scraper:
 
         top.mainloop()
         
-        
-        #while loggedIn == False:
-            #pass
         
         html = self.browser.page_source
         

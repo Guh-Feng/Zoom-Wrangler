@@ -5,3 +5,7 @@ BRU9110,Intro to Business Coloring Books,2,12:00,12:00,12:00,https://ufl.zoom.us
 MAS2173,Math for Preschoolers,2,12:00,12:00,12:00,example zoom link
 GEB2015,Advanced Business Addition,2,12:00,12:00,12:00,another link
 HAM,Intro to hamburger,3,14:00,14:00,14:00,zoom.com/hamburger
+Class Code,Class Name,"Day of week (0 = Monday, 1 = Tuesday..)",Notification Time,Auto-Open Time,Start Time,Link
+SWE,Software engineering,0,T11:55,T11:59,T12:00,https://ufl.zoom.us/my/drsanethiathomas
+code,class name,1,T11:55,T11:59,T12:00,.!text2
+<class code>,<class name>,"<day of week> [0=Mon, 1=Tues,...]",T11:55,T11:59,T12:00,.!text2

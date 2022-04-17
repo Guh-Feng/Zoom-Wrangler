@@ -8,12 +8,10 @@ def main():
     #https://ufl.instructure.com/courses/447867/pages/pm-slash-information?module_item_id=9127714
     #https://ufl.instructure.com/courses/447867
     #https://ufl.instructure.com/courses/447867/modules
-
-    inValue = ''
-    cyclesIn = 0
-
+    
     #web scraping input
     def con():
+        global inValue, cyclesIn
         inValue = site.get(1.0, "end-1c")
         cyclesIn = cycle.get(1.0, "end-1c")
         top.destroy()
@@ -48,24 +46,25 @@ def main():
             continue
     """
 
+    global inValue, cyclesIn
     webScraper = Scraper(inValue, cyclesIn)
     webScraper.scrapeWeb()
     
     zoom_links = webScraper.returnLinks()
 
     #new file input
-    newness = True
-    
     def yes():
+        global newness
         newness = True
         top2.destroy()
 
     def no():
+        global newness
         newness = False
         top2.destroy()
 
     top2 = Tk()
-    top2.geometry("200x100")
+    top2.geometry("300x100")
     top2.title("New File?")
     
     txt = Text(top2, height = 2, width = 30)
@@ -79,9 +78,8 @@ def main():
     noButton.pack()
 
     top2.mainloop()
-    
 
-    
+
     """
     while True:
         newness = input('\nWill you be creating a new file? (Y/N)\n')
@@ -96,6 +94,7 @@ def main():
             continue
     """
     
+    global newness
     db = Database(zoom_links, is_new = newness)
     
 #    except Exception as exc:
