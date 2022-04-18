@@ -1,5 +1,7 @@
 from tkinter import *
 from ZoomConnect import open_meeting
+from driver import main
+from os.path import exists
 import csv
 
 root = Tk()
@@ -9,10 +11,10 @@ root.geometry("750x850")
 
 
 # function to overwrite the CSV from the current myList - actual tracking of each row
-def writeList():
-    f = open('links.csv', "w+")
+def writeList(file_name_):
+    f = open(file_name_, "w+")
     f.close()
-    file = open('links.csv', 'a+', newline ='')
+    file = open(file_name_, 'a+', newline ='')
     with file:
         write = csv.writer(file)
         write.writerows(myList)
@@ -23,8 +25,20 @@ myList = []
 myListbox = Listbox(root, height=35, width=100)
 myListbox.pack(pady=15)
 
-    #write info from CSV into myList
-with open('links.csv', 'r') as read_obj:
+#write info from CSV into myList
+file_name_ = input('Input file name: ')
+if file_name_[-4:] != '.csv':
+    file_name_ = file_name_ + '.csv'
+    
+if not exists(file_name_):
+    #print(file_name_, 'does not exist!')
+    with open(file_name_, "w", encoding='utf-8-sig') as csvfile:
+        writer = csv.writer(csvfile)
+        csvheader = ['Class Code', 'Class Name', 'Day of week (0 = Monday, 1 = Tuesday..)',
+                               'Notification Time', 'Auto-Open Time', 'Start Time', 'Link']
+        writer.writerow(csvheader)
+
+with open(file_name_, 'r') as read_obj:
     reader = csv.reader(read_obj)
     myList = list(reader)
 
@@ -79,35 +93,6 @@ def popUp():
     inpt1.insert(INSERT, "<Class Name>")
     inpt1.pack()
     inpt2 = Text(topp, height = 1, width = 50)
-    inpt2.insert(INSERT, "<Meeting Day>")
-    inpt2.pack()
-    inpt3 = Text(topp, height = 1, width = 50)
-    inpt3.insert(INSERT, "<Meeting Time>")
-    inpt3.pack()
-    inpt4 = Text(topp, height = 1, width = 50)
-    inpt4.insert(INSERT, "<Meeting Link>")
-    inpt4.pack()
-
-    #inner function for adding link
-    def addLink():
-        #TODO: add the additional link to the csv file
-        #also get the time of the meeting for notifications
-        myListbox.insert(END, inputtxt.get(1.0, "end-1c"))
-        topp.destroy()
-
-    # Create new window
-    topp = Toplevel(root)
-    topp.geometry("800x300")
-    topp.title("Input")
-
-    # TextBox creation for inputs
-    inpt0 = Text(topp, height = 1, width = 50)
-    inpt0.insert(INSERT, "<Class Code>")
-    inpt0.pack()
-    inpt1 = Text(topp, height = 1, width = 50)
-    inpt1.insert(INSERT, "<Class Name>")
-    inpt1.pack()
-    inpt2 = Text(topp, height = 1, width = 50)
     inpt2.insert(INSERT, "<Meeting Day (0 = Monday, 1 = Tuesday..)>")
     inpt2.pack()
     inpt3 = Text(topp, height = 1, width = 50)
@@ -148,7 +133,8 @@ def popUp():
 
 def scrapeWeb():
     #TODO: integrate web scraping functionality
-    pass
+    root.destroy()
+    main()
 
 
 openButton = Button(root, text="Open Link", command=openLink)
